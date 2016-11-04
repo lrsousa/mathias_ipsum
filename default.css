@@ -15,3 +15,8 @@ body {
   line-height: 1.33;
   border-radius: 90px;
 }
+
+.fonte-nask {
+  font-size: 0.3em;
+  color: black;
+}

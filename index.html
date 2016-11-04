@@ -48,14 +48,17 @@
         </div>
         <div class="row">
             <div class="col-md-8 col-sm-12" style="color: white; font-size: 3em;">
-              <textarea id='area-paragrafos' rows="4" cols="25"></textarea>
+              <textarea id='area-paragrafos' class="fonte-nask" rows="12" cols="60"></textarea>
             </div>
         </div>
 
         <div class="row" style="margin-top: 2%;">
+          <div class="col-md-1">
+            <input id="input-qtd-paragrafos" class="form-control" type="number" name="name" value="1" >
+          </div>
         	<div class="col-md-2 col-md-offset-1 col-sm-offset-5">
-            	<button id="conselho" type="button" class="btn btn-danger">Manda bala</button>
-            </div>
+          	<button id="manda-bala" type="button" class="btn btn-danger">Mandar bala</button>
+          </div>
         </div>
         <!-- /.row -->
     </div>
@@ -70,35 +73,45 @@
         };
 
         var _frases = [];
+        var _frasesPorParagrafo = 12;
         $(function() {
-            $.get("https://raw.githubusercontent.com/lrsousa/repositoriofrases_conselhosdoreogerio/master/frases", function(data) {
+            $.get("https://raw.githubusercontent.com/lrsousa/mathias_ipsum/master/frases.mathias", function(data) {
                 var opa = data.split('\n');
-                $(opa).each(function(index) {
-                    aa = this.split(' - ');
-                    _frases.push({
-                        'frase': aa[0],
-                        'quem' : aa[1]
-                    });
-                });
-                _frases.pop();
+                for (i = 0; i < opa.length - 1; i++) {
+                  _frases.push(opa[i]);
+                }
+                mandarBala(1);
             });
         });
 
-    	$("#conselho").on('click', function() {
-    		var sortido = Math.floor(Math.random() * _frases.length) + 1;
-    		$("#conteudoConselho").html('"' + _frases[sortido - 1].frase + '"');
-            trocarFoto(_frases[sortido - 1].quem);
-    	});
+        var mandarBala = function(qtdParagrafos) {
+          console.log(_frases);
+          console.log(qtdParagrafos);
+          var texto = "";
+          for (i = 0; i < qtdParagrafos; i++) {
+            console.log("opa");
+            for (j = 0; j < _frasesPorParagrafo; j++) {
+              var sortido = Math.floor(Math.random() * _frases.length);
+              texto = texto.concat(_frases[sortido]);
+            }
+            texto = texto.concat("\n\n");
+          }
+          $("#area-paragrafos").val(texto);
+        };
 
-        var trocarFoto = function(quem) {
+        $("#manda-bala").on("click", function() {
+          mandarBala($("#input-qtd-paragrafos").val());
+        })
+
+        var trocarFoto = function(kenai) {
             $('.full').css({
-                "background": 'url(img/00' + quem + '.png) no-repeat center center fixed',
+                "background": 'url(img/00' + kenai + '.png) no-repeat center center fixed',
                 '-webkit-background-size': 'cover',
                 '-moz-background-size': 'cover',
                 '-o-background-size': 'cover',
                 'background-size': 'cover'
             });
-        }
+        };
     </script>
 </body>
 </html>
