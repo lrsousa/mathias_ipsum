@@ -85,11 +85,8 @@
         });
 
         var mandarBala = function(qtdParagrafos) {
-          console.log(_frases);
-          console.log(qtdParagrafos);
           var texto = "";
           for (i = 0; i < qtdParagrafos; i++) {
-            console.log("opa");
             for (j = 0; j < _frasesPorParagrafo; j++) {
               var sortido = Math.floor(Math.random() * _frases.length);
               texto = texto.concat(_frases[sortido]);
