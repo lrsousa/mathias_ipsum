@@ -1,0 +1,17 @@
+body {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	background: none;
+}
+
+.full {
+
+}
+.btn-circle.btn-lg {
+  width: 180px;
+  height: 180px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 90px;
+}
